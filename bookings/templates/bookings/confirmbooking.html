@@ -1,0 +1,43 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+{% block title %}Booing{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Order Summary</h4>
+    <hr>
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5 class="text-capitalize">Name: {{mem.name}}</h5>
+          <p>age: {{mem.age}}</p>
+          <p class="text-capitalize">locality: {{mem.locality}}</p>
+          <p class="text-capitalize">city: {{mem.city}}</p>
+          <p >zipcode: {{mem.zipcode}}</p>
+          <p class="text-capitalize">state: {{mem.state}}</p>
+        </div>
+      </div>
+    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+  </div>
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Center Details</h4>
+    <hr>
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5 class="text-capitalize">Center Name: {{cen.name}}</h5>
+          <p>Starting Time: {{cen.start_time}}</p>
+          <p>Ending Time: {{cen.end_time}}</p>
+        </div>
+      </div>
+      <a href="{% url 'member' %}" class="btn btn-primary m-1 btn-lg" role="button">Back</a>  
+    {% if messages %}
+     {% for message in messages %}
+     <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}
+     </p>
+   {% endfor %}
+      
+  {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

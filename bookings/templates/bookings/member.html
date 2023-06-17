@@ -1,0 +1,48 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+{% block title %}Member{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'member' %}" class="btn {{active}}">Member</a></li>
+    <li class="d-grid"><a href="{% url 'member' %}" class="btn">Today Count {{cnt}}</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+   <div class="row">
+    
+    {% for ad in mem %}
+        
+    <div class="col-sm-6">
+     <div class="card">
+      <div class="card-body">
+        <h3 class="text-capitalize">Member {{forloop.counter}}</h3>
+        <p class="text-capitalize">Name: {{ad.name}}</p>
+        <p class="text-capitalize">Locality: {{ad.locality}}</p>
+        <p class="text-capitalize">City: {{ad.city}}</p>
+        <p class="text-capitalize">State: {{ad.state}}</p>
+        <p>Pin Code: {{ad.zipcode}}</p>
+        <a href="{% url 'bookcenter' ad.id %}" class="btn btn-primary m-1" role="button">Book Vaccine Center</a>  
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+    
+    
+   </div>
+   {% if messages %}
+     {% for message in messages %}
+     <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}
+     </p>
+   {% endfor %}
+      
+  {% endif %}
+  </div>
+  
+ </div>
+</div>
+{% endblock main-content %}

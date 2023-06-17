@@ -1,0 +1,47 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+{% block title %}Book Center {% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'member' %}" class="btn">Member</a></li>
+    <li class="d-grid"><a href="{% url 'member' %}" class="btn">Today Count {{cnt}}</a></li>
+   </ul>
+   <form action="{% url 'searchcenter' prev %}" method="get" class="form-inline">
+    {% csrf_token %} 
+    <div class="form-group  mt-2  ">
+      <input type="search" class="form-control" id="search" name='search' placeholder="Search">
+    </div>
+    <div class="form-group ml-3 mt-2 mx-5">
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </div>
+  </form> 
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+   <div class="row">
+    
+    {% for ad in cen %}
+        
+    <div class="col-sm-6">
+     <div class="card">
+      <div class="card-body">
+        <h3 class="text-capitalize">Center {{forloop.counter}}</h3>
+        <p class="text-capitalize">Name: {{ad.name}}</p>
+        <p>Opening: {{ad.start_time}}</p>
+        <p>Closing: {{ad.end_time}}</p> 
+        <a href="{% url 'confirmbooking' ad.name prev %}" class="btn btn-primary m-1" role="button">Placed Booking</a> 
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+    
+    
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
